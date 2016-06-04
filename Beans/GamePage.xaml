@@ -1,0 +1,84 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Beans.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="800"
+    shell:SystemTray.IsVisible="False"
+    Loaded="OnPhoneApplicationPageLoaded">
+
+    <phone:PhoneApplicationPage.Projection>
+        <PlaneProjection x:Name="planeProjection"
+                         CenterOfRotationX="0" CenterOfRotationY="0" />
+    </phone:PhoneApplicationPage.Projection>
+
+    <phone:PhoneApplicationPage.Triggers>
+        <EventTrigger>
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="planeProjection"
+                                     Storyboard.TargetProperty="LocalOffsetY"
+                                     From="-480" To="0" Duration="0:0:0.2" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </phone:PhoneApplicationPage.Triggers>
+
+    <Grid x:Name="LayoutRoot" Background="#FFD40F" HorizontalAlignment="Left" VerticalAlignment="Top" Width="800" Height="480">
+        <Canvas x:Name="GameSpace" Width="615" Height="462" Margin="9" 
+                HorizontalAlignment="Left" 
+                MouseLeftButtonUp="OnGameSpaceMouseUp">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Image/bg_panel.png"/>
+            </Canvas.Background>
+            <Grid x:Name="Role" Width="48" Height="48" Visibility="Collapsed">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Image/bg_role.png"/>
+                </Grid.Background>
+            </Grid>
+            <Path x:Name="RoleBeanElement">
+                <Path.Data>
+                    <EllipseGeometry Center="24 24" x:Name="RoleBean" RadiusX="24" RadiusY="24" />
+                </Path.Data>
+            </Path>
+        </Canvas>
+        <StackPanel Width="175" HorizontalAlignment="Right" Orientation="Vertical">
+            <Grid Width="164" Height="90" Margin="6,40,0,0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Image/bg_score.png"/>
+                </Grid.Background>
+                <TextBlock x:Name="ScorePanel" Margin="8,40,0,0" Text="0" Width="140" Height="40" FontSize="26" Foreground="#E64D19" FontWeight="Bold"
+                           HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Center"/>
+            </Grid>
+            <StackPanel Width="158" Height="58" Margin="4,55,0,45" Orientation="Horizontal">
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="Image/bg_next.png"/>
+                </StackPanel.Background>
+                <Image x:Name="FirstNextImg" Source="Image/bean_default.png" Width="48" Height="48" VerticalAlignment="Top" Margin="3,2,0,0"/>
+                <Image x:Name="SecondNextImg" Source="Image/bean_default.png" Width="48" Height="48" VerticalAlignment="Top" Margin="2,2,0,0"/>
+                <Image x:Name="ThirdNextImg" Source="Image/bean_default.png" Width="48" Height="48" VerticalAlignment="Top" Margin="2,2,0,0"/>
+            </StackPanel>
+            <Button Style="{StaticResource customImageButtonStyle}" Click="OnNewGameButtonClick">
+                <Image Source="Image/btn_newgame.png" Width="154" Height="60"/>
+            </Button>
+            <Button Style="{StaticResource customImageButtonStyle}" Margin="0,20,0,0" Click="OnBackButtonClick">
+                <Image Source="Image/btn_back.png" Width="154" Height="60"/>
+            </Button>
+        </StackPanel>
+        <Grid x:Name="MessagePanel" Margin="9" HorizontalAlignment="Left" RenderTransformOrigin="0.5 0.5">
+            <Grid.RenderTransform>
+                <ScaleTransform x:Name="MessageScaleTransform" ScaleX="0" ScaleY="0"/>
+            </Grid.RenderTransform>
+            <Rectangle Width="615" Height="462"/>
+            <Rectangle Width="360" Height="100" Fill="#BBFFD40F" Stroke="White" StrokeThickness="5" RadiusX="20" RadiusY="20"/>
+            <TextBlock x:Name="MessageTextPanel" Text="Invalid Path" Width="360" TextAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="ExtraBlack" Foreground="#E64D19"/>
+        </Grid>
+    </Grid>
+</phone:PhoneApplicationPage>

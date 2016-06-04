@@ -1,0 +1,57 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Beans.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="480"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    shell:SystemTray.IsVisible="False">
+
+    <phone:PhoneApplicationPage.Projection>
+        <PlaneProjection x:Name="planeProjection" CenterOfRotationX="0" CenterOfRotationY="1.5" />
+    </phone:PhoneApplicationPage.Projection>
+
+    <phone:PhoneApplicationPage.Triggers>
+        <EventTrigger>
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="planeProjection"
+                                     Storyboard.TargetProperty="LocalOffsetY"
+                                     From="-480" To="0" Duration="0:0:0.2" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </phone:PhoneApplicationPage.Triggers>
+
+    <StackPanel x:Name="LayoutRoot">
+        <StackPanel.Background>
+            <ImageBrush ImageSource="Image/bg_main.png"/>
+        </StackPanel.Background>
+        <Button Click="OnOptionButtonClick" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Width="260" Height="80" Margin="540,100,0,0"
+                Style="{StaticResource customImageButtonStyle}">
+            <Image Source="Image/btn_option.png" Width="244" Height="64"/>
+        </Button>
+        <Button Click="OnStartButtonClick" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Width="260" Height="80" Margin="460,10,0,0"
+                Style="{StaticResource customImageButtonStyle}">
+            <Image Source="Image/btn_start.png" Width="244" Height="64"/>
+        </Button>
+        <Button Click="OnTutorialButtonClick" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Width="260" Height="80" Margin="380,10,0,0"
+                Style="{StaticResource customImageButtonStyle}">
+            <Image Source="Image/btn_tutorial.png" Width="244" Height="64"/>
+        </Button>
+        <Button Click="OnScoresButtonClick" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Width="260" Height="80" Margin="300,10,0,0"
+                Style="{StaticResource customImageButtonStyle}">
+            <Image Source="Image/btn_score.png" Width="244" Height="64"/>
+        </Button>
+    </StackPanel>
+</phone:PhoneApplicationPage>
